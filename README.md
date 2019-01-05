@@ -1,5 +1,5 @@
-[![GitHub](https://img.shields.io/github/license/solokeyssec/solo-bsp.svg)](https://crates.io/crates/solo-bsp)
-[![Crates](https://img.shields.io/crates/v/solo-bsp.svg)](https://github.com/SoloKeysSec/solo-bsp/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/solokeyssec/solo-bsp.svg)](https://github.com/SoloKeysSec/solo-bsp/blob/master/LICENSE)
+[![Crates](https://img.shields.io/crates/v/solo-bsp.svg)](https://crates.io/crates/solo-bsp)
 
 # solo-bsp
 This is a (WIP!) board support package for the open source Solo security key.
