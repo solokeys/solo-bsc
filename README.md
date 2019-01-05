@@ -2,7 +2,7 @@
 [![Crates](https://img.shields.io/crates/v/solo-bsp.svg)](https://crates.io/crates/solo-bsp)
 
 # solo-bsp
-This is a (WIP!) board support package for the open source Solo security key.
+This is a (WIP!) [Rust](https://github.com/rust-embedded) board support package for the open source Solo security key.
 
 This key [consists of](https://github.com/SoloKeysSec/solo-hw):
 - an STM32L432KC microcontroller
