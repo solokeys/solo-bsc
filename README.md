@@ -12,7 +12,7 @@ This key [consists of](https://github.com/SoloKeysSec/solo-hw):
 - an NCP114 voltage regulator
 - and various resistors, capacitors, and Zener diodes
 
-One specialty is that it has a [custom USB bootloader](https://solo.solokeys.io/building/), allowing easy updates. To use it, `FLASH ORIGIN` in [memory.x](https://github.com/SoloKeysSec/solo-bsp/master/memory.x) needs to be set to `0x800_5000` instead of the conventional `0x800_0000`.
+One specialty is that it has a [custom USB bootloader](https://solo.solokeys.io/building/), allowing easy updates. To use it, `FLASH ORIGIN` in [memory.x](https://github.com/SoloKeysSec/solo-bsp/blob/master/memory.x) needs to be set to `0x800_5000` instead of the conventional `0x800_0000`.
 Alternatively, the ST DFU bootloader can be used.
 Additionally, serial TX/RX and all SWD pins (SWDIO, SWCLK, SWO) are [kind of broken out](https://conorpp.com/3d-printing-a-programming-jig-and-embedding-pogo-pins-using-eagle-and-fusion-360).
 
