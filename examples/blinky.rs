@@ -1,16 +1,16 @@
 #![no_main]
 #![no_std]
 
-// pick a panicking behavior
+// panicking behavior
 extern crate panic_halt;
 
-use cortex_m_rt::entry;
+// board support
+extern crate solo_bsp as board;
+use board::stm32;
+use board::hal::prelude::*;
+use board::hal::delay;
 
-use stm32l4xx_hal::stm32;
-use stm32l4xx_hal::prelude::*;
-use stm32l4xx_hal::delay::Delay;
-
-#[entry]
+#[board::entry]
 fn main() -> ! {
     let core = cortex_m::Peripherals::take().unwrap();
     let device = stm32::Peripherals::take().unwrap();
@@ -30,7 +30,7 @@ fn main() -> ! {
     let mut led_green = gpioa.pa3
         .into_push_pull_output(&mut gpioa.moder, &mut gpioa.otyper);
 
-    let mut timer = Delay::new(core.SYST, clocks);
+    let mut timer = delay::Delay::new(core.SYST, clocks);
     let half_second: u32 = 500;
 
     loop {
