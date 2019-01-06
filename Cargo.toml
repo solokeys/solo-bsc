@@ -14,7 +14,8 @@ keywords = [
 license = "GPL-3.0-or-later"
 name = "solo-bsp"
 repository = "https://github.com/solokeyssec/solo-bsp"
-version = "0.0.0"
+version = "0.0.1"
+edition = "2018"
 
 [dependencies]
 cortex-m = "0.5.8"
