@@ -22,6 +22,7 @@ edition = "2018"
 cortex-m = "0.5.8"
 cortex-m-rt = "0.6.7"
 # hex-literal = "0.1.1"
+ssd1306 = "0.2.2"
 
 [dependencies.embedded-hal]
 features = ["unproven"]
