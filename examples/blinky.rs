@@ -25,24 +25,24 @@ fn main() -> ! {
 
     // let mut led_blue = gpioa.pa1
     //     .into_push_pull_output(&mut gpioa.moder, &mut gpioa.otyper);
-    // let mut led_red = gpioa.pa2
-    //     .into_push_pull_output(&mut gpioa.moder, &mut gpioa.otyper);
-    let mut led_green = gpioa.pa3
+    let mut led_red = gpioa.pa2
         .into_push_pull_output(&mut gpioa.moder, &mut gpioa.otyper);
+    // let mut led_green = gpioa.pa3
+    //     .into_push_pull_output(&mut gpioa.moder, &mut gpioa.otyper);
 
     let mut timer = delay::Delay::new(core.SYST, clocks);
     let half_second: u32 = 500;
 
     loop {
-        // led_red.set_high();
-        // timer.delay_ms(half_second);
-        // led_red.set_low();
-        // timer.delay_ms(half_second);
+        led_red.set_high();
+        timer.delay_ms(half_second);
+        led_red.set_low();
+        timer.delay_ms(half_second);
 
-        led_green.set_high();
-        timer.delay_ms(half_second);
-        led_green.set_low();
-        timer.delay_ms(half_second);
+        // led_green.set_high();
+        // timer.delay_ms(half_second);
+        // led_green.set_low();
+        // timer.delay_ms(half_second);
 
         // led_blue.set_high();
         // timer.delay_ms(half_second);
