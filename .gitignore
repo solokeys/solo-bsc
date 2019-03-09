@@ -2,3 +2,4 @@
 Cargo.lock
 *.hex
 itm.txt
+memory.x

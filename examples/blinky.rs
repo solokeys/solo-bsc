@@ -19,34 +19,43 @@ fn main() -> ! {
     let mut rcc = device.RCC.constrain();
 
     let clocks = rcc.cfgr
+        .hclk(8.mhz())
         .freeze(&mut flash.acr);
 
-    let mut gpioa = device.GPIOA.split(&mut rcc.ahb2);
+     let mut gpioa = device.GPIOA.split(&mut rcc.ahb2);
 
-    // let mut led_blue = gpioa.pa1
-    //     .into_push_pull_output(&mut gpioa.moder, &mut gpioa.otyper);
-    // let mut led_red = gpioa.pa2
-    //     .into_push_pull_output(&mut gpioa.moder, &mut gpioa.otyper);
-    let mut led_green = gpioa.pa3
-        .into_push_pull_output(&mut gpioa.moder, &mut gpioa.otyper);
+     let mut led_blue = gpioa.pa1
+         .into_push_pull_output(&mut gpioa.moder, &mut gpioa.otyper);
+     let mut led_red = gpioa.pa2
+         .into_push_pull_output(&mut gpioa.moder, &mut gpioa.otyper);
+     let mut led_green = gpioa.pa3
+         .into_push_pull_output(&mut gpioa.moder, &mut gpioa.otyper);
+
+    // let mut gpiob = device.GPIOB.split(&mut rcc.ahb2);
+    // let mut led = gpiob.pb3.into_push_pull_output(&mut gpiob.moder, &mut gpiob.otyper);
 
     let mut timer = delay::Delay::new(core.SYST, clocks);
-    let half_second: u32 = 500;
+    let second: u32 = 1000;
 
     loop {
-        // led_red.set_high();
-        // timer.delay_ms(half_second);
-        // led_red.set_low();
-        // timer.delay_ms(half_second);
+        // led.set_high();
+        // timer.delay_ms(second);
+        // led.set_low();
+        // timer.delay_ms(second);
+
+        led_red.set_high();
+        timer.delay_ms(second);
+        led_red.set_low();
+        timer.delay_ms(second);
 
         led_green.set_high();
-        timer.delay_ms(half_second);
+        timer.delay_ms(second);
         led_green.set_low();
-        timer.delay_ms(half_second);
+        timer.delay_ms(second);
 
-        // led_blue.set_high();
-        // timer.delay_ms(half_second);
-        // led_blue.set_low();
-        // timer.delay_ms(half_second);
+        led_blue.set_high();
+        timer.delay_ms(second);
+        led_blue.set_low();
+        timer.delay_ms(second);
     }
 }
