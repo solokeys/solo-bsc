@@ -38,7 +38,8 @@ macro_rules! uprintln {
 
 
 // https://tools.ietf.org/html/rfc8032#section-7.3
-fn ed25519ph_rf8032_test_vector() -> (bool, Sha512, Signature, Signature) {
+// fn ed25519ph_rf8032_test_vector() -> (bool, Sha512, Signature, Signature) {
+fn ed25519ph_rf8032_test_vector() -> (bool, Signature, Signature) {
     let secret_key: [u8; SECRET_KEY_LENGTH] = [
         0x83, 0x3f, 0xe6, 0x24, 0x09, 0x23, 0x7b, 0x9d,
         0x62, 0xec, 0x77, 0x58, 0x75, 0x20, 0x91, 0x1e,
@@ -67,13 +68,14 @@ fn ed25519ph_rf8032_test_vector() -> (bool, Sha512, Signature, Signature) {
     let keypair: Keypair = Keypair { secret: secret, public: public };
     let reference_signature: Signature = Signature::from_bytes(&signature[..]).unwrap();
 
-    let mut prehash_for_signing: Sha512 = Sha512::default();
-    let mut prehash_for_verifying: Sha512 = Sha512::default();
+    // let mut prehash_for_signing: Sha512 = Sha512::default();
+    // let mut prehash_for_verifying: Sha512 = Sha512::default();
 
-    prehash_for_signing.input(&message[..]);
-    prehash_for_verifying.input(&message[..]);
+    // prehash_for_signing.input(&message[..]);
+    // prehash_for_verifying.input(&message[..]);
 
-    let generated_signature: Signature = keypair.sign_prehashed(prehash_for_signing, None);
+    // let generated_signature: Signature = keypair.sign_prehashed(prehash_for_signing, Some(b"SoloKeys Firmware"));
+    let generated_signature: Signature = keypair.sign(&message);//, Some(b"SoloKeys Firmware"));
 
     // assert!(reference_signature == generated_signature,
     //         "Original signature from test vectors doesn't equal signature produced:\
@@ -83,7 +85,7 @@ fn ed25519ph_rf8032_test_vector() -> (bool, Sha512, Signature, Signature) {
 
     (
         reference_signature == generated_signature,
-        prehash_for_verifying,
+        // prehash_for_verifying,
         reference_signature,
         generated_signature,
     )
@@ -91,7 +93,8 @@ fn ed25519ph_rf8032_test_vector() -> (bool, Sha512, Signature, Signature) {
 
 #[board::entry]
 fn main() -> ! {
-    let (sig_match, hash, ref_sig, sig) = ed25519ph_rf8032_test_vector();
+    // let (sig_match, hash, ref_sig, sig) = ed25519ph_rf8032_test_vector();
+    let (sig_match, ref_sig, sig) = ed25519ph_rf8032_test_vector();
     let core = cortex_m::Peripherals::take().unwrap();
     let device = stm32::Peripherals::take().unwrap();
 
@@ -137,7 +140,7 @@ fn main() -> ! {
     uprintln!(&mut tx, "the clocks: {:?}", clocks);
     uprintln!(&mut tx, "sig:\n {:?}\n", sig);
     uprintln!(&mut tx, "ref_sig:\n {:?}\n", ref_sig);
-    uprintln!(&mut tx, "hash:\n {:?}\n", hash);
+    // uprintln!(&mut tx, "hash:\n {:?}\n", hash);
 
     // setup I2C and Display
     let mut scl = gpioa.pa9.into_open_drain_output(&mut gpioa.moder, &mut gpioa.otyper);
@@ -177,11 +180,13 @@ fn main() -> ! {
         //     sig,
         // );
         // timer.delay_ms(delay_ms);
-        led_pin.set_high();
-        timer.delay_ms(delay_ms);
+        // led_pin.set_high();
+        // timer.delay_ms(delay_ms);
 
-        led_pin.set_low();
-        timer.delay_ms(delay_ms);
+        // led_pin.set_low();
+        // timer.delay_ms(delay_ms);
+        // let (sig_match, hash, ref_sig, sig) = ed25519ph_rf8032_test_vector();
+        let (sig_match, ref_sig, sig) = ed25519ph_rf8032_test_vector();
 
         // let _ = oled_display.write_str(unsafe { core::str::from_utf8_unchecked(&[c]) });
         // let _ = oled_display.write_str("Hello! ");
