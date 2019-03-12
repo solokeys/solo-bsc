@@ -5,7 +5,7 @@
 extern crate panic_halt;
 
 // board support
-extern crate solo_bsp as board;
+extern crate solo_bsc as board;
 use board::stm32;
 use board::hal::prelude::*;
 use board::hal::delay;

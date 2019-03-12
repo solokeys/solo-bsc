@@ -11,10 +11,11 @@ keywords = [
     "cortex-m",
     "template",
 ]
+exclude = ["/ref/*"]
 license = "MIT OR Apache-2.0"
-name = "solo-bsp"
-repository = "https://github.com/solokeys/solo-bsp"
-version = "0.0.2"
+name = "solo-bsc"
+repository = "https://github.com/solokeys/solo-bsc"
+version = "0.0.3"
 readme = "README.md"
 edition = "2018"
 

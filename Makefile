@@ -37,5 +37,8 @@ flash-solo:
 openocd:
 	openocd
 
-gdb:
+gdb-openocd:
 	gdb-multiarch -q -x openocd.gdb $(ELF)
+
+gdb-bmp:
+	gdb-multiarch -q -x bmp.gdb $(ELF)

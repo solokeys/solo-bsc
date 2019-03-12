@@ -1,6 +1,6 @@
-[![License](https://img.shields.io/badge/License-Apache%202.o-yellogreen.svg)](https://github.com/solokeys/solo-bsp/blob/master/LICENSE-APACHE) [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/solokeys/solo-bsp/blob/master/LICENSE-MIT) [![Crates](https://img.shields.io/crates/v/solo-bsp.svg)](https://crates.io/crates/solo-bsp)
+[![License](https://img.shields.io/badge/License-Apache%202.o-yellogreen.svg)](https://github.com/solokeys/solo-bsc/blob/master/LICENSE-APACHE) [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/solokeys/solo-bsc/blob/master/LICENSE-MIT) [![Crates](https://img.shields.io/crates/v/solo-bsc.svg)](https://crates.io/crates/solo-bsc)
 
-# solo-bsp
+# solo-bsc
 This is a (WIP!) [Rust](https://github.com/rust-embedded) board support package for the open source Solo security key.
 
 This key [consists of](https://github.com/solokeys/solo-hw):
@@ -11,7 +11,7 @@ This key [consists of](https://github.com/solokeys/solo-hw):
 - an NCP114 voltage regulator
 - and various resistors, capacitors, and Zener diodes
 
-One specialty is that it has a [custom USB bootloader](https://solo.solokeys.io/building/), allowing easy updates. To use it, `FLASH ORIGIN` in [memory.x](https://github.com/solokeys/solo-bsp/blob/master/memory.x) needs to be set to `0x800_5000` instead of the conventional `0x800_0000`.
+One specialty is that it has a [custom USB bootloader](https://solo.solokeys.io/building/), allowing easy updates. To use it, `FLASH ORIGIN` in [memory.x](https://github.com/solokeys/solo-bsc/blob/master/memory.x) needs to be set to `0x800_5000` instead of the conventional `0x800_0000`.
 Alternatively, the ST DFU bootloader can be used.
 Additionally, serial TX/RX and all SWD pins (SWDIO, SWCLK, SWO) are [kind of broken out](https://conorpp.com/3d-printing-a-programming-jig-and-embedding-pogo-pins-using-eagle-and-fusion-360).
 
