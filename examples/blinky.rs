@@ -9,6 +9,7 @@ extern crate solo_bsc as board;
 use board::stm32;
 use board::hal::prelude::*;
 use board::hal::delay;
+use board::led::{Color, Leds};
 
 #[board::entry]
 fn main() -> ! {
@@ -22,20 +23,14 @@ fn main() -> ! {
         .hclk(8.mhz())
         .freeze(&mut flash.acr);
 
-     let mut gpioa = device.GPIOA.split(&mut rcc.ahb2);
-
-     let mut led_blue = gpioa.pa1
-         .into_push_pull_output(&mut gpioa.moder, &mut gpioa.otyper);
-     let mut led_red = gpioa.pa2
-         .into_push_pull_output(&mut gpioa.moder, &mut gpioa.otyper);
-     let mut led_green = gpioa.pa3
-         .into_push_pull_output(&mut gpioa.moder, &mut gpioa.otyper);
+     let gpioa = device.GPIOA.split(&mut rcc.ahb2);
+     let mut leds = Leds::new(gpioa);
 
     // let mut gpiob = device.GPIOB.split(&mut rcc.ahb2);
     // let mut led = gpiob.pb3.into_push_pull_output(&mut gpiob.moder, &mut gpiob.otyper);
 
     let mut timer = delay::Delay::new(core.SYST, clocks);
-    let second: u32 = 1000;
+    let second: u32 = 100;
 
     loop {
         // led.set_high();
@@ -43,19 +38,20 @@ fn main() -> ! {
         // led.set_low();
         // timer.delay_ms(second);
 
-        led_red.set_high();
+        leds[Color::Red].on();
         timer.delay_ms(second);
-        led_red.set_low();
-        timer.delay_ms(second);
-
-        led_green.set_high();
-        timer.delay_ms(second);
-        led_green.set_low();
+        leds[Color::Red].off();
         timer.delay_ms(second);
 
-        led_blue.set_high();
+        leds[Color::Green].on();
         timer.delay_ms(second);
-        led_blue.set_low();
+        leds[Color::Green].off();
         timer.delay_ms(second);
+
+        leds[Color::Blue].on();
+        timer.delay_ms(second);
+        leds[Color::Blue].off();
+        timer.delay_ms(second);
+
     }
 }
